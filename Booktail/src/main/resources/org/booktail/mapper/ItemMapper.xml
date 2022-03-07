@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.booktail.mapper.ItemMapper">
+<insert id="regist">
+	insert into bookItem(title,isbn,datetime,thumbnail,authors,translators,contents,publisher,price,salePrice)
+	values(#{title},#{isbn},#{datetime},#{thumbnail},#{authors},#{translators},#{contents},#{publisher},#{price},#{salePrice});
+</insert>
+<select id="detail" resultType="org.booktail.domain.ItemDTO">
+	select * from bookItem where gdsNum=#{gdsNum};
+</select>
+<select id="list" resultType="org.booktail.domain.ItemDTO">
+	select * from (select @rownum:=@rownum+1 as rownum,b.* from(select @rownum:=0) as tmp, bookItem as b) as ItemList 
+	<![CDATA[
+		where rownum > (#{pageNum}-1)*#{amount} and rownum <= #{pageNum}*#{amount}
+		order by regdate desc;
+	]]>
+</select>
+<select id="getTotalCount" resultType="int">
+	select count(*) from bookItem;
+</select>
+
+</mapper>
