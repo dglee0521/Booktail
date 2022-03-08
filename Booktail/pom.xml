@@ -15,6 +15,23 @@
 	</properties>
 	<dependencies>
 		<!-- Spring -->
+		
+		<!-- 이메일 전송 인증을 위해 추가 -->
+		  <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>        
+        
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+		<!-- 이메일 전송 인증을 위해 추가 -->
+		
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
@@ -151,14 +168,7 @@
 		    <version>3.1.0</version>
 		    <scope>provided</scope>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-		    <artifactId>lombok</artifactId>
-		    <version>1.18.0</version>
-		    <scope>provided</scope>
-		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>

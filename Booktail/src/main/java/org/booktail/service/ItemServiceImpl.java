@@ -2,6 +2,7 @@ package org.booktail.service;
 
 import java.util.ArrayList;
 
+import org.booktail.domain.CartDTO;
 import org.booktail.domain.Criteria;
 import org.booktail.domain.ItemDTO;
 import org.booktail.mapper.ItemMapper;
@@ -27,5 +28,9 @@ public class ItemServiceImpl implements ItemService{
 	
 	public int getTotalCount(Criteria cri) {
 		return imapper.getTotalCount(cri);
+	}
+	
+	public void addCart(CartDTO cdto) {
+		
 	}
 }

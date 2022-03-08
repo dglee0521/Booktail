@@ -46,4 +46,5 @@ public class ShopController {
 		iservice.regist(idto);
 		return "redirect:/shop/";
 	}
+	
 }
