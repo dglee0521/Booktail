@@ -14,6 +14,9 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="../resources/css/styles.css" rel="stylesheet" />
+         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="../resources/js/cart.js"></script>
     </head>
     <body>
     	<!-- nav -->
@@ -25,6 +28,7 @@
                     <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="${detail.thumbnail}" alt="..." /></div>
                     <div class="col-md-6">
                         <div class="small mb-1">${detail.publisher}</div>
+                        <input type="text" class="gdsNum" value="${detail.gdsNum}">
                         <h1 class="display-5 fw-bolder">${detail.title}</h1>
                         <div class="fs-5 mb-5">
                             <span class="text-decoration-line-through">${detail.price}원</span>
@@ -32,8 +36,8 @@
                         </div>
                         <p class="lead">${detail.contents}</p>
                         <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                            <input class="form-control text-center me-3 numBox" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                            <button class="btn btn-outline-dark flex-shrink-0 addCartBtn" type="button">
                                 <i class="bi-cart-fill me-1"></i>
                                 Add to cart
                             </button>

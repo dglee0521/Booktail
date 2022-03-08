@@ -34,4 +34,5 @@ public class MemberServiceImpl implements MemberService{
 		return mmapper.idChk(mdto);
 	}
 	
+	
 }

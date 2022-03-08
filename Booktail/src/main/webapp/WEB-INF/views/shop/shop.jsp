@@ -15,9 +15,8 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="../resources/css/styles.css" rel="stylesheet" />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="..resources/js/cart.js"></script>
+        <script src="../resources/js/cart.js"></script>
     </head>
     <body>
 		<%@ include file="../nav.jsp" %>
@@ -52,7 +51,7 @@
 	                            <!-- Product actions-->
 	                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style="display:flex; justify-content: center;">
 	                                <div class="text-center" style="margin-right:10px"><a class="btn btn-outline-dark mt-auto" href="/shop/detail?gdsNum=${item.gdsNum}">상세</a></div>
-	                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">카트</a></div>
+	                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" class="addCartBtn" href="#">카트</a></div>
 	                            </div>
 	                        </div>
                     	</div>						
