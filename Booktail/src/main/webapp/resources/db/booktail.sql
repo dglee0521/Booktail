@@ -37,6 +37,11 @@ create table bookCart (
 	primary key(cartNum, userId) 
 );
 select * from bookCart;
+
+update bookCart
+set cartStock=cartStock+1
+where cartNum=10;
+
 drop table bookCart;
 alter table bookCart
     add constraint bookCart_userId foreign key(userId)
@@ -47,3 +52,33 @@ alter table bookCart
     references bookItem(gdsNum);
 drop table bookCart;
 delete from bookItem where ino=2;
+
+select
+     row_number() over(order by c.cartNum desc) as num,
+     c.cartNum, c.userId, c.gdsNum, c.cartStock, c.addDate,
+     g.title, g.price, g.salePrice,g.thumbnail
+ from bookCart c inner join bookItem g on c.gdsNum = g.gdsNum where c.userId = 'ehdrb0457';
+ 
+ create table bookOrder (
+    orderId     varchar(50) not null, -- 주문고유번호
+    userId      varchar(50) not null, -- 주문자
+    orderRec    varchar(50) not null, -- 수신자
+    userAddr1   varchar(20) not null, -- 우편번호
+    userAddr2   varchar(50) not null, -- 기본주소
+    userAddr3   varchar(50) not null, -- 상세주소
+    orderPhon   varchar(30) not null, -- 연락처
+    amount      int      not null, --총 가격
+    orderDate   datetime default now(),   -- 주문날짜
+    primary key(orderId)
+);
+create sequence 
+
+drop table tbl_order;
+-- 하나의 주문에 여러 상품이 들어갈 수 있기 때문에 
+create table bookOrder_details (
+    orderDetailsNum int       not null,
+    orderId         varchar(50) not null,
+    gdsNum          int          not null,
+    cartStock       int          not null,
+    primary key(orderDetailsNum)
+);
