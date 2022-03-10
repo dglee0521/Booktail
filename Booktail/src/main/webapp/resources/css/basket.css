@@ -1,4 +1,14 @@
+.listResult { padding:20px; background:#eee; }
+.listResult .sum { float:left; width:45%; font-size:22px; }
 
+.listResult .orderOpne { float:right; width:45%; text-align:right; }
+.listResult .orderOpne button { font-size:18px; padding:5px 10px; border:1px solid #999; background:#fff;}
+.listResult::after { content:""; display:block; clear:both; }
+
+.basketBox{
+	width:1200px;
+	margin:50px auto 50px;
+}
 .basketdiv {
     width: 100%;
     border-top: 1px solid #e0e0e0;
@@ -15,7 +25,6 @@
     .basketdiv .data {
         border-bottom: 1px dashed #888;
         box-sizing: border-box;
-        cursor: pointer;
         float: left;
         width: 100%;
     }
@@ -155,7 +164,9 @@
         text-decoration: none;
         font-size: 0.9375em;
     }
-
+i{
+	cursor:pointer;
+}
 .abutton-alt {
     background-color: #d3e2c6;
 }

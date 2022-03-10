@@ -1,8 +1,11 @@
 package org.booktail.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.booktail.domain.CartDTO;
+import org.booktail.domain.CartListDTO;
 import org.booktail.domain.Criteria;
 import org.booktail.domain.ItemDTO;
 import org.booktail.domain.MemberDTO;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequestMapping("shop")
@@ -53,10 +57,17 @@ public class ShopController {
 		return "redirect:/shop/";
 	}
 	
-	@GetMapping("basket")
-	public String basket() {
-		
-		return "shop/basket";
+	@RequestMapping(value = "/basket", method = RequestMethod.GET)
+	public String basket(HttpSession session, Model model) throws Exception {
+		 
+		 MemberDTO member = (MemberDTO)session.getAttribute("login");
+		 String userId = member.getId();
+		 
+		 ArrayList<CartListDTO> cartList = iservice.cartList(userId);
+		 
+		 model.addAttribute("cartList", cartList);
+		 
+		 return "shop/basket";
 	}
 	
 	@ResponseBody
@@ -73,5 +84,50 @@ public class ShopController {
 	 }
 
 	 return result;
+	 
 	}
+	@ResponseBody
+	@RequestMapping(value="/changeStock", method=RequestMethod.POST)
+	public int changeStock(HttpSession session, CartDTO cart) throws Exception {
+		MemberDTO member = (MemberDTO)session.getAttribute("login");
+		 String userId = member.getId();
+		 
+		 int result = 0;
+		 int cartNum = 0;
+		 
+		 if(member != null) {
+			  cart.setUserId(userId);
+			  
+			  result = 1;
+			  iservice.changeStock(cart);
+			 }  
+			 return result;  
+	}
+	// 카트 삭제
+	@ResponseBody
+	@RequestMapping(value = "/deleteCart", method = RequestMethod.POST)
+	public int deleteCart(HttpSession session, @RequestParam(value = "chbox[]") ArrayList<String> chArr, CartDTO cart) throws Exception {
+
+	 MemberDTO member = (MemberDTO)session.getAttribute("login");
+	 String userId = member.getId();
+	 
+	 int result = 0;
+	 int cartNum = 0;
+	 
+	 
+	 if(member != null) {
+	  cart.setUserId(userId);
+	  
+	  for(String i : chArr) {   
+	   cartNum = Integer.parseInt(i);
+	   cart.setCartNum(cartNum);
+	   iservice.deleteCart(cart);
+	  }   
+	  result = 1;
+	  
+	 }  
+	 System.out.println(result);
+	 return result;  
+	}
+	
 }

@@ -25,4 +25,21 @@
 	insert into bookCart(userId, gdsNum, cartStock)
     values(#{userId}, #{gdsNum}, #{cartStock})
 </insert>
+
+<!-- 카트 리스트 -->
+<select id="cartList" resultType="org.booktail.domain.CartListDTO">
+	select
+     row_number() over(order by c.cartNum desc) as num,
+     c.cartNum, c.userId, c.gdsNum, c.cartStock, c.addDate,
+     g.title, g.price, g.salePrice,g.thumbnail
+	from bookCart c inner join bookItem g on c.gdsNum = g.gdsNum where c.userId = #{id}
+</select>
+<update id="changeStock">
+	update bookCart
+	set cartStock=#{cartStock}
+	where cartNum=#{cartNum};
+</update>
+<delete id="deleteCart">
+ 	delete from bookCart where cartNum = #{cartNum} and userId = #{userId}
+</delete>
 </mapper>
