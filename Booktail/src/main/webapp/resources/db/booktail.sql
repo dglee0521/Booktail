@@ -66,19 +66,21 @@ select
     userAddr1   varchar(20) not null, -- 우편번호
     userAddr2   varchar(50) not null, -- 기본주소
     userAddr3   varchar(50) not null, -- 상세주소
-    orderPhon   varchar(30) not null, -- 연락처
-    amount      int      not null, --총 가격
+    orderPhone   varchar(30) not null,  
+    amount      int      not null, -- 총 가격
     orderDate   datetime default now(),   -- 주문날짜
     primary key(orderId)
 );
-create sequence 
-
-drop table tbl_order;
+drop table bookOrder;
+select * from bookOrder;
 -- 하나의 주문에 여러 상품이 들어갈 수 있기 때문에 
 create table bookOrder_details (
-    orderDetailsNum int       not null,
+    orderDetailsNum int auto_increment,
     orderId         varchar(50) not null,
     gdsNum          int          not null,
     cartStock       int          not null,
     primary key(orderDetailsNum)
 );
+drop table bookOrder_details;
+ insert into bookOrder_details(orderId, gdsNum, cartStock)
+     select bookOrder_details_seq.nextval, #{orderId}, gdsNum, cartStock from bookCart   
