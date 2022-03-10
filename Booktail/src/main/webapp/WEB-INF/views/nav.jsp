@@ -23,7 +23,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/shop/">All Products</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                        <li><a class="dropdown-item" href="/shop/orderList">Order List</a></li>
                         <li><a class="dropdown-item" href="/shop/itemReg">New Book</a></li>
                     </ul>
                 </li>

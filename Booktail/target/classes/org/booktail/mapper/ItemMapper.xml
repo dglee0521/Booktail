@@ -42,4 +42,26 @@
 <delete id="deleteCart">
  	delete from bookCart where cartNum = #{cartNum} and userId = #{userId}
 </delete>
+
+<!-- 주문 정보 -->
+<insert id="orderInfo">
+ insert into bookOrder(orderId, userId, orderRec, userAddr1, userAddr2, userAddr3, orderPhone, amount)
+     values(#{orderId}, #{userId}, #{orderRec}, #{userAddr1}, #{userAddr2}, #{userAddr3}, #{orderPhone}, #{amount})
+</insert>
+   
+<!-- 주문 상세 정보 --> 
+<insert id="orderInfo_Details">
+ insert into bookOrder_details(orderId, gdsNum, cartStock)
+     select #{orderId}, gdsNum, cartStock from bookCart   
+</insert> 
+<!-- 카트 비우기 -->
+<delete id="cartAllDelete">
+ delete from bookCart
+ where userId = #{userId}
+</delete>
+<!-- 특정 유저의 주문 목록 -->
+<select id="orderList" resultType="org.booktail.domain.OrderDTO">
+ select orderId, userId, orderRec, userAddr1, userAddr2, userAddr3, orderPhone, amount, orderDate from bookOrder
+ where userId = #{userId}
+</select>
 </mapper>

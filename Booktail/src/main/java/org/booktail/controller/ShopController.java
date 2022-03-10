@@ -1,6 +1,8 @@
 package org.booktail.controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,8 +11,12 @@ import org.booktail.domain.CartListDTO;
 import org.booktail.domain.Criteria;
 import org.booktail.domain.ItemDTO;
 import org.booktail.domain.MemberDTO;
+import org.booktail.domain.OrderDTO;
+import org.booktail.domain.OrderDetailDTO;
 import org.booktail.domain.PageDTO;
 import org.booktail.service.ItemService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +30,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("shop")
 @Controller
 public class ShopController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(ShopController.class);
 	@Autowired
 	private ItemService iservice;
 	
@@ -128,6 +136,54 @@ public class ShopController {
 	 }  
 	 System.out.println(result);
 	 return result;  
+	}
+	
+	// 주문하기
+	@RequestMapping(value = "/cartList", method = RequestMethod.POST)
+	public String order(HttpSession session, OrderDTO order, OrderDetailDTO orderDetail) throws Exception {
+		 logger.info("order");
+		 
+		 MemberDTO member = (MemberDTO)session.getAttribute("login");  
+		 String userId = member.getId();
+		 
+		 Calendar cal = Calendar.getInstance();
+		 int year = cal.get(Calendar.YEAR);
+		 String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
+		 String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
+		 String subNum = "";
+		 
+		 for(int i = 1; i <= 6; i ++) {
+		  subNum += (int)(Math.random() * 10);
+		 }
+		 
+		 String orderId = ymd + "_" + subNum;
+		 
+		 order.setOrderId(orderId);
+		 order.setUserId(userId);
+		  
+		 iservice.orderInfo(order);
+		 
+		 orderDetail.setOrderId(orderId);   
+		 iservice.orderInfo_Details(orderDetail);
+		 System.out.println(userId);
+		 iservice.cartAllDelete(userId);
+		 
+		 return "redirect:/shop/orderList";  
+	}
+	
+	// 주문 목록
+	@RequestMapping(value = "/orderList", method = RequestMethod.GET)
+	public void getOrderList(HttpSession session, OrderDTO order, Model model) throws Exception {
+	 logger.info("get order list");
+	 
+	 MemberDTO member = (MemberDTO)session.getAttribute("login");
+	 String userId = member.getId();
+	 
+	 order.setUserId(userId);
+	 System.out.println(order.getUserId());
+	 ArrayList<OrderDTO> orderList = iservice.orderList(order);
+	 
+	 model.addAttribute("orderList", orderList);
 	}
 	
 }

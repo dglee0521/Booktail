@@ -14,10 +14,13 @@
 	<script src="../resources/js/basket2.js"></script>  
 </head>
 <body>
+
 	<!-- nav -->
     <%@ include file="../nav.jsp" %>
     <!-- 장바구니 리스트 -->
+    
     <div class="basketBox">
+    <h2 style="margin-bottom:30px">장바구니 리스트</h2>
 	    <form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;">
 	    
 	            <input type="hidden" name="cmd" value="order">
@@ -101,21 +104,52 @@
 	    		
 	    		<div class="listResult">
 	            <div class="bigtext right-align box blue summoney sum" id="sum_p_price">합계금액: <fmt:formatNumber pattern="###,###,###" value="${sum}" />원</div>
-	            	<div class="orderOpne">
-				  		<button type="button" class="orderOpne_bnt">주문 정보 입력</button>
-					</div>
-	    		</div>
-	    		
-	            <div id="goorder" class="">
-	                <div class="clear"></div>
-	                <div class="buttongroup center-align cmd">
-	                    <a href="javascript:void(0);">선택한 상품 주문</a>
-	                    
-	                </div>
+	             <div class="orderOpne">
+				  <button type="button" class="orderOpne_bnt">주문 정보 입력</button>
+				 </div>
 	            </div>
-	        </form>
-        </div>
+    			 
 
+	        </form>
+	        <div class="orderInfo">
+			 <form role="form" method="post" autocomplete="off" action="/shop/cartList">
+			    
+			  <input type="hidden" name="amount" value="${sum}" />
+			    
+			  <div class="inputArea">
+			   <label for="">수령인</label>
+			   <input type="text" name="orderRec" id="orderRec" required="required" />
+			  </div>
+			  
+			  <div class="inputArea">
+			   <label for="orderPhon">수령인 연락처</label>
+			   <input type="text" name="orderPhone" id="orderPhon" required="required" />
+			  </div>
+			  
+			  <div class="inputArea">
+			   <label for="userAddr1">우편번호</label>
+			   <input type="text" name="userAddr1" id="userAddr1" required="required" />
+			  </div>
+			  
+			  <div class="inputArea">
+			   <label for="userAddr2">1차 주소</label>
+			   <input type="text" name="userAddr2" id="userAddr2" required="required" />
+			  </div>
+			  
+			  <div class="inputArea">
+			   <label for="userAddr3">2차 주소</label>
+			   <input type="text" name="userAddr3" id="userAddr3" required="required" />
+			  </div>
+			  
+			  <div class="inputArea">
+			   <button type="submit" class="order_btn">주문</button>
+			   <button type="button" class="cancel_btn">취소</button> 
+			  </div>
+			  
+			 </form> 
+			</div>
+        </div>
+		<%@ include file="../footer.jsp" %>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

@@ -49,7 +49,7 @@ $(document).ready(function(){
 			data:{cartStock:$(this).val(),cartNum:$(this).attr("data-cartNum")},
 			dataType:"json",
 			success:function(result){
-				
+				location.href = "/shop/basket";
 			}
 		})
 	})
@@ -58,7 +58,11 @@ $(document).ready(function(){
 		
 		var p_num = $(this).parents(".updown").children(".p_num");
 		var num = p_num.val();
-		num = parseInt(num) + 1;
+		if(num<99){
+			num = parseInt(num) + 1;
+		} else{
+			num=99;
+		}
 		p_num.val(num);
 		
 		$.ajax({
@@ -67,7 +71,7 @@ $(document).ready(function(){
 			data:{cartStock:p_num.val(),cartNum:p_num.attr("data-cartNum")},
 			dataType:"json",
 			success:function(result){
-				
+				location.href = "/shop/basket";
 			}
 		})
 	})
@@ -75,8 +79,11 @@ $(document).ready(function(){
 	$(".down").click(function(){
 		var p_num = $(this).parents(".updown").children(".p_num");
 		var num = p_num.val();
-		num = parseInt(num) - 1;
-	
+		if(num>1){
+			num = parseInt(num) - 1;
+		}else{
+			num=1;
+		}
 		p_num.val(num);
 		
 		$.ajax({
@@ -85,10 +92,20 @@ $(document).ready(function(){
 			data:{cartStock:p_num.val(),cartNum:p_num.attr("data-cartNum")},
 			dataType:"json",
 			success:function(result){
-				
+				location.href = "/shop/basket";
 			}
 		})
 	})
+	
+	 $(".orderOpne_bnt").click(function(){
+		  $(".orderInfo").slideDown();
+		  $(".orderOpne_bnt").slideUp();
+		 }); 
+	
+	$(".cancel_btn").click(function(){
+		 $(".orderInfo").slideUp();
+		 $(".orderOpne_bnt").slideDown();
+		}); 
 	
 });
 
