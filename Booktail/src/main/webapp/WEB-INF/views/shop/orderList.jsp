@@ -17,7 +17,7 @@
 	<!-- nav -->
     <%@ include file="../nav.jsp" %>
 	<section id="content">
- 
+ 	
 	 <ul class="orderList">
 	  <c:forEach items="${orderList}" var="orderList">
 	  <li>
