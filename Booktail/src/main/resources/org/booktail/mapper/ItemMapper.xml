@@ -39,6 +39,15 @@
 	set cartStock=#{cartStock}
 	where cartNum=#{cartNum};
 </update>
+<select id="checkCart" resultType="int">
+	select count(*) from bookCart
+	where userId=#{userId} and gdsNum=#{gdsNum}
+</select>
+<update id="updateStock">
+	update bookCart
+	set cartStock=cartStock+#{cartStock}
+	where userId=#{userId} and gdsNum=#{gdsNum}
+</update>
 <delete id="deleteCart">
  	delete from bookCart where cartNum = #{cartNum} and userId = #{userId}
 </delete>
@@ -48,7 +57,7 @@
  insert into bookOrder(orderId, userId, orderRec, userAddr1, userAddr2, userAddr3, orderPhone, amount)
      values(#{orderId}, #{userId}, #{orderRec}, #{userAddr1}, #{userAddr2}, #{userAddr3}, #{orderPhone}, #{amount})
 </insert>
-   
+ 
 <!-- 주문 상세 정보 --> 
 <insert id="orderInfo_Details">
  insert into bookOrder_details(orderId, gdsNum, cartStock)

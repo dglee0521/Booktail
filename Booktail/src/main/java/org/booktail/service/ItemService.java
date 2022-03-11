@@ -24,6 +24,10 @@ public interface ItemService {
 	
 	public void changeStock(CartDTO cdto) throws Exception;
 	
+	public int checkCart(CartDTO cdto) throws Exception;
+	
+	public void updateStock(CartDTO cdto) throws Exception;
+	
 	public void deleteCart(CartDTO cdto) throws Exception;
 	
 	//주문 정보

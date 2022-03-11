@@ -29,7 +29,7 @@
                     <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="${detail.thumbnail}" alt="..." /></div>
                     <div class="col-md-6">
                         <div class="small mb-1">${detail.publisher}</div>
-                        <input type="text" class="gdsNum" value="${detail.gdsNum}">
+                        <input type="text" class="gdsNum" name="gdsNum" value="${detail.gdsNum}">
                         <h1 class="display-5 fw-bolder">${detail.title}</h1>
                         <div class="fs-5 mb-5">
                             <span class="text-decoration-line-through"><fmt:formatNumber pattern="###,###,###" value="${detail.price}" />원</span>

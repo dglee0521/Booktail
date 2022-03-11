@@ -86,9 +86,14 @@ public class ShopController {
 	 MemberDTO member = (MemberDTO)session.getAttribute("login");
 	 System.out.println("id : " +member.getId());
 	 if(member != null) {
-	  cart.setUserId(member.getId());
-	  iservice.addCart(cart);
-	  result = 1;
+		 cart.setUserId(member.getId());
+		 if(iservice.checkCart(cart)==1) {
+			 iservice.updateStock(cart);
+			 result = 1;
+		 } else {
+			 iservice.addCart(cart);
+			 result = 1;
+		 }
 	 }
 
 	 return result;

@@ -7,5 +7,22 @@
  section#content div.goodsName { padding:10px 0; text-align:center; }
  section#content div.goodsName a { color:#000; }
 */
-section#content ul li { border:5px solid #eee; padding:10px 20px; margin-bottom:20px; }
-section#content .orderList span { font-size:20px; font-weight:bold; display:inline-block; width:90px; margin-right:10px; }
+ul,ol{
+	list-style:NONE;
+}
+#content{
+	width:1200px;
+	margin:50px auto;
+}
+section#content ul li {
+	border:5px solid #eee; 
+	padding:10px 20px; 
+	margin-bottom:20px; 
+}
+section#content .orderList span {
+	font-size:20px; 
+	font-weight:bold; 
+	display:inline-block; 
+	width:90px; 
+	margin-right:10px; 
+}

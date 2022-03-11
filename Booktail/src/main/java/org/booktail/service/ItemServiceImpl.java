@@ -44,6 +44,15 @@ public class ItemServiceImpl implements ItemService{
 	public void changeStock(CartDTO cdto) throws Exception{
 		imapper.changeStock(cdto);
 	}
+	
+	public int checkCart(CartDTO cdto) throws Exception{
+		return imapper.checkCart(cdto);
+	}
+	
+	public void updateStock(CartDTO cdto) throws Exception{
+		imapper.updateStock(cdto);
+	}
+	
 	public void deleteCart(CartDTO cdto) throws Exception{
 		imapper.deleteCart(cdto);
 	}

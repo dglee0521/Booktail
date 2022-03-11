@@ -52,7 +52,6 @@
 	                            <!-- Product actions-->
 	                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style="display:flex; justify-content: center;">
 	                                <div class="text-center" style="margin-right:10px"><a class="btn btn-outline-dark mt-auto" href="/shop/detail?gdsNum=${item.gdsNum}">상세</a></div>
-	                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" class="addCartBtn" href="#">카트</a></div>
 	                            </div>
 	                        </div>
                     	</div>						
