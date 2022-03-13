@@ -14,6 +14,7 @@ import org.booktail.domain.MemberDTO;
 import org.booktail.domain.OrderDTO;
 import org.booktail.domain.OrderDetailDTO;
 import org.booktail.domain.PageDTO;
+import org.booktail.domain.ReviewDTO;
 import org.booktail.service.ItemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,8 +50,10 @@ public class ShopController {
 	}
 	
 	@GetMapping("detail")
-	public String detail(Model model, ItemDTO idto) {
+	public String detail(Model model, ItemDTO idto, ReviewDTO rdto) {
 		model.addAttribute("detail", iservice.detail(idto));
+		model.addAttribute("reviews", iservice.reviews(rdto));
+		rdto.setGdsNum(idto.getGdsNum());
 		return "shop/itemDetail";
 	}
 	
@@ -189,6 +192,19 @@ public class ShopController {
 	 ArrayList<OrderDTO> orderList = iservice.orderList(order);
 	 
 	 model.addAttribute("orderList", orderList);
+	}
+	
+	// 상품 조회 - 소감(댓글) 작성
+	@PostMapping(value = "registReview")
+	public String registReply(ReviewDTO rdto, HttpSession session) throws Exception {
+	 logger.info("regist reply");
+	 
+	 MemberDTO member = (MemberDTO)session.getAttribute("login");
+	 rdto.setUserId(member.getId());
+	 
+	 iservice.registReview(rdto);
+	 
+	 return "redirect:/shop/detail?gdsNum=" + rdto.getGdsNum();
 	}
 	
 }

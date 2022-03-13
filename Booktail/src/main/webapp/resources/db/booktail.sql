@@ -10,6 +10,8 @@ create table member(
     phone varchar(15) not null,  -- 휴대폰 번호
     regdata datetime default now() -- 등록날짜
 );
+
+insert member('ehdrb','asdasd','이동규','1111','남자','ehdrb0457@naver.com','01054890457');
 select * from member;
 create table bookItem(
 	gdsNum int primary key auto_increment,
@@ -81,6 +83,24 @@ create table bookOrder_details (
     cartStock       int          not null,
     primary key(orderDetailsNum)
 );
+
 drop table bookOrder_details;
- insert into bookOrder_details(orderId, gdsNum, cartStock)
-     select bookOrder_details_seq.nextval, #{orderId}, gdsNum, cartStock from bookCart   
+
+create table reply(
+	repNum int auto_increment,
+	gdsNum int not null,
+    userId varchar(50) not null,
+    repCon varchar(2000) not null,
+    repDate datetime default now(),
+    primary key(repNum)
+);
+
+drop table reply;
+alter table reply
+	add constraint  reply_gdsNum foreign key(gdsNum)
+    references bookItem(gdsNum);
+    
+alter table reply
+	add constraint reply_userId foreign key(userId)
+    references member(id);
+    

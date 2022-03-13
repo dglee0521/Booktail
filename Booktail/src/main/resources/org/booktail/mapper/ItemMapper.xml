@@ -73,4 +73,12 @@
  select orderId, userId, orderRec, userAddr1, userAddr2, userAddr3, orderPhone, amount, orderDate from bookOrder
  where userId = #{userId}
 </select>
+<insert id="registReview">
+ insert into reviews (gdsNum, userId, repCon)
+     values (#{gdsNum}, #{userId}, #{repCon})
+</insert>
+<select id="reviews" resultType="org.booktail.domain.ReviewDTO">
+	select * from reviews
+	where gdsNum=#{gdsNum};
+</select>
 </mapper>

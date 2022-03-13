@@ -8,6 +8,7 @@ import org.booktail.domain.Criteria;
 import org.booktail.domain.ItemDTO;
 import org.booktail.domain.OrderDTO;
 import org.booktail.domain.OrderDetailDTO;
+import org.booktail.domain.ReviewDTO;
 
 public interface ItemService {
 	public void regist(ItemDTO idto);
@@ -38,6 +39,13 @@ public interface ItemService {
 	
 	//카트 비우기
 	public void cartAllDelete(String userId) throws Exception;
+	
 	//주문 목록
 	public ArrayList<OrderDTO> orderList(OrderDTO order) throws Exception;
+	
+	//상품 리뷰 등록
+	public void registReview(ReviewDTO rdto) throws Exception;
+	
+	//상품 리뷰 조회
+	public ArrayList<ReviewDTO> reviews(ReviewDTO rdto);
 }

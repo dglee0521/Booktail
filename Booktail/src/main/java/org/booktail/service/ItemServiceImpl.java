@@ -8,6 +8,7 @@ import org.booktail.domain.Criteria;
 import org.booktail.domain.ItemDTO;
 import org.booktail.domain.OrderDTO;
 import org.booktail.domain.OrderDetailDTO;
+import org.booktail.domain.ReviewDTO;
 import org.booktail.mapper.ItemMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,6 +67,7 @@ public class ItemServiceImpl implements ItemService{
 	public void orderInfo_Details(OrderDetailDTO orderDetail) throws Exception{
 		imapper.orderInfo_Details(orderDetail);
 	}
+	
 	//주문 목록
 	public ArrayList<OrderDTO> orderList(OrderDTO order) throws Exception{
 		return imapper.orderList(order);
@@ -74,5 +76,15 @@ public class ItemServiceImpl implements ItemService{
 	//카트 비우기
 	public void cartAllDelete(String userId) throws Exception{
 		imapper.cartAllDelete(userId);
+	}
+	
+	//상품 리뷰
+	public void registReview(ReviewDTO rdto) throws Exception{
+		imapper.registReview(rdto);
+	}
+	
+	//상품 리뷰 조회
+	public ArrayList<ReviewDTO> reviews(ReviewDTO rdto){
+		return imapper.reviews(rdto);
 	}
 }
