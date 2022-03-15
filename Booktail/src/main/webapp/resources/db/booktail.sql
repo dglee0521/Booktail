@@ -11,7 +11,8 @@ create table member(
     regdata datetime default now() -- 등록날짜
 );
 
-insert member('ehdrb','asdasd','이동규','1111','남자','ehdrb0457@naver.com','01054890457');
+insert member(id,password,name,birth,gender,email,phone)
+values('ehdrb','asdasd','이동규','2000-05-21','남자','ehdrb0457@naver.com','01054890457');
 select * from member;
 create table bookItem(
 	gdsNum int primary key auto_increment,
@@ -86,7 +87,7 @@ create table bookOrder_details (
 
 drop table bookOrder_details;
 
-create table reply(
+create table reviews(
 	repNum int auto_increment,
 	gdsNum int not null,
     userId varchar(50) not null,
@@ -94,7 +95,7 @@ create table reply(
     repDate datetime default now(),
     primary key(repNum)
 );
-
+select * from reviews;
 drop table reply;
 alter table reply
 	add constraint  reply_gdsNum foreign key(gdsNum)
