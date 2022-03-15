@@ -24,7 +24,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -53,7 +52,6 @@ public class ShopController {
 	public String detail(Model model, ItemDTO idto, ReviewDTO rdto) {
 		model.addAttribute("detail", iservice.detail(idto));
 		model.addAttribute("reviews", iservice.reviews(rdto));
-		rdto.setGdsNum(idto.getGdsNum());
 		return "shop/itemDetail";
 	}
 	
@@ -68,7 +66,7 @@ public class ShopController {
 		return "redirect:/shop/";
 	}
 	
-	@RequestMapping(value = "/basket", method = RequestMethod.GET)
+	@GetMapping(value = "/basket")
 	public String basket(HttpSession session, Model model) throws Exception {
 		 
 		 MemberDTO member = (MemberDTO)session.getAttribute("login");
@@ -82,7 +80,7 @@ public class ShopController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/addCart", method = RequestMethod.POST)
+	@PostMapping(value = "/addCart")
 	public int addCart(CartDTO cart, HttpSession session) throws Exception {
 	 
 	 int result = 0;
@@ -103,7 +101,7 @@ public class ShopController {
 	 
 	}
 	@ResponseBody
-	@RequestMapping(value="/changeStock", method=RequestMethod.POST)
+	@PostMapping(value="/changeStock")
 	public int changeStock(HttpSession session, CartDTO cart) throws Exception {
 		MemberDTO member = (MemberDTO)session.getAttribute("login");
 		 String userId = member.getId();
@@ -121,7 +119,7 @@ public class ShopController {
 	}
 	// 카트 삭제
 	@ResponseBody
-	@RequestMapping(value = "/deleteCart", method = RequestMethod.POST)
+	@PostMapping(value = "/deleteCart")
 	public int deleteCart(HttpSession session, @RequestParam(value = "chbox[]") ArrayList<String> chArr, CartDTO cart) throws Exception {
 
 	 MemberDTO member = (MemberDTO)session.getAttribute("login");
@@ -147,7 +145,7 @@ public class ShopController {
 	}
 	
 	// 주문하기
-	@RequestMapping(value = "/cartList", method = RequestMethod.POST)
+	@PostMapping(value = "/cartList")
 	public String order(HttpSession session, OrderDTO order, OrderDetailDTO orderDetail) throws Exception {
 		 logger.info("order");
 		 
@@ -176,11 +174,11 @@ public class ShopController {
 		 System.out.println(userId);
 		 iservice.cartAllDelete(userId);
 		 
-		 return "redirect:/shop/orderList";  
+		 return "redirect:/shop/orderList";
 	}
 	
 	// 주문 목록
-	@RequestMapping(value = "/orderList", method = RequestMethod.GET)
+	@GetMapping(value = "/orderList")
 	public void getOrderList(HttpSession session, OrderDTO order, Model model) throws Exception {
 	 logger.info("get order list");
 	 
@@ -197,7 +195,7 @@ public class ShopController {
 	// 상품 조회 - 소감(댓글) 작성
 	@PostMapping(value = "registReview")
 	public String registReply(ReviewDTO rdto, HttpSession session) throws Exception {
-	 logger.info("regist reply");
+	 logger.info("regist review");
 	 
 	 MemberDTO member = (MemberDTO)session.getAttribute("login");
 	 rdto.setUserId(member.getId());
